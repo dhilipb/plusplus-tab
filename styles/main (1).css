@@ -1,0 +1,138 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f0f0;
+    padding-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:visited {
+    color: #888;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.container {}
+
+.error,
+.loading {
+    text-align: center;
+    display: block;
+    color: #aaa;
+    font-size: 12px;
+    margin-left: -10px;
+    /* it looks uncentered otherwise */
+}
+/* Posts */
+
+.container {
+    width: calc(290px * 4);
+    margin: 0 auto;
+}
+
+.post {
+    float: left;
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+    width: 250px;
+    height: 250px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+    position: relative;
+}
+
+.post .source {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.post .source.hackernews {
+    background-image: url('../images/hackernews.png');
+}
+
+.post .source.designernews {
+    background-image: url('../images/designernews.png');
+}
+
+.post .source.producthunt {
+    background-image: url('../images/producthunt.png');
+}
+
+.post .source.reddit {
+    background-image: url('../images/reddit.png');
+}
+
+.post .source.reddit.gunners {
+    background-image: url('../images/gunners.png');
+}
+
+.screenshot img {
+    background-color: white;
+    width: 230px;
+    max-height: 155px;
+    margin: 0 auto;
+}
+
+.post .info .fa-caret-up {
+    font-size: 18px;
+}
+
+.post .title {
+    font-weight: bold;
+    color: #534540;
+    font-size: 13px;
+    line-height: 15px;
+    margin-top: 5px;
+}
+
+.post .description {
+    overflow: hidden;
+}
+.post .info {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    margin-top: 5px;
+    background: white;
+}
+
+.post .info,
+.post .info * {
+    color: #777;
+}
+
+.post .info > span {
+    margin-left: 10px;
+}

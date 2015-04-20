@@ -1,0 +1,21 @@
+{
+   "background": {
+      "scripts": [ "scripts/background.js" ]
+   },
+   "chrome_url_overrides": {
+      "newtab": "index.html"
+   },
+   "content_security_policy": "script-src 'unsafe-eval' 'unsafe-inline' 'self' https://ssl.google-analytics.com/; style-src * 'unsafe-inline'",
+   "default_locale": "en",
+   "description": "__MSG_appDescription__",
+   "icons": {
+      "128": "images/icon-128.png",
+      "16": "images/icon-16.png"
+   },
+   "manifest_version": 2,
+   "name": "__MSG_appName__",
+   "permissions": [ "webRequest", "tabs", "http://*/*", "https://*/*", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.0.6",
+   "web_accessible_resources": [  ]
+}

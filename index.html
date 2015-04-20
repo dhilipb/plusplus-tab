@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/font-awesome.css">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="scripts/sources.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery.js"></script>
+
+    <!-- Angular -->
+    <script type="text/javascript" src="scripts/lib/angular.js"></script>
+    <script type="text/javascript" src="scripts/lib/angular.dcb-img-fallback.js"></script>
+    <script type="text/javascript" src="scripts/lib/angular-ngStorage.js"></script>
+
+    <!-- Other libs -->
+    <script type="text/javascript" src="scripts/lib/md5.js"></script>
+    <script type="text/javascript" src="scripts/lib/is.js"></script>
+
+    <!-- My scripts -->
+    <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/services.js"></script>
+    <script type="text/javascript" src="scripts/services.oauth.js"></script>
+    <script type="text/javascript" src="scripts/services.feeds.js"></script>
+    <script type="text/javascript" src="scripts/services.cache.js"></script>
+</head>
+
+<body ng-app="App" ng-csp ng-cloak>
+    <div class="container" ng-controller="NewsController as c">
+
+        <!-- Sources -->
+        <div class="sources">
+            <div
+                ng-repeat="(source, sValues) in sources"
+                ng-click="toggleSource(sValues)"
+                ng-class="{source: !0, active: sValues.enabled, loading: sValues.loading}"
+                style="background-image: url('{{sValues['logo']}}')">
+            </div>
+        </div>
+
+        <!-- Posts -->
+        <div class="posts">
+            <div class="post" ng-repeat="post in posts | orderObjectBy:'votes'" ng-if="sources[post.source]['enabled']">
+                <div class="source" style="background-image: url('{{sources[post.source]['logo']}}')"></div>
+                <div class="screenshot">
+                    <a href="{{post.url}}" target="_blank">
+                        <img ng-src="{{post.image}}" fallback-src="images/NoImage.gif" />
+                    </a>
+                </div>
+                <div class="title">
+                    <a href="{{post.url}}" alt="{{post.title}}" target="_blank">{{post.title}}</a>
+                </div>
+                <div class="description" ng-if="post.description">
+                    {{post.description}}
+                </div>
+                <div class="info">
+                    <span ng-if="post.user">
+                        {{post.user}}
+                    </span>
+                    <span>
+                            <i class="fa fa-caret-up"></i>
+                            {{post.votes}}
+                        </span>
+                    <span>
+                            <a href="{{post.comments.link}}" target="_blank">
+                                <i class="fa fa-comment"></i>
+                                {{post.comments.count}}
+                        </a>
+                        </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

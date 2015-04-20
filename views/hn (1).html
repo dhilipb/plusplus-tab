@@ -1,0 +1,23 @@
+<div ng-hide="posts" class="loading animated fadeIn">{{ loadingAlternateText || "Loading…"}}</div>
+
+<section class="post-group clearfix">
+  <ul class="posts clearfix animated fadeInUp">
+    <li class="post" ng-repeat="post in posts">
+      <div class="wrap">
+        <a class="thumb" href="{{post.url}}" target="_blank">
+          <img ng-src="{{post.image || loader }}" ng-class="{loader: !post.image}">
+        </a>
+        <p>
+          <a class="title" href="{{ post.url}}" target="_blank">{{ post.title }}</a>
+          <span class="tagline">{{ post.domain }}</span>
+          <small>
+            <span class="stats" ng-show="post.votes_count">&#x25b2; {{ post.upVotes }}</span>
+            <a class="stats" href="{{ post.comments_link }}" ng-show="post.comments_count" ><i class="fa fa-comment"></i> {{ post.comments_count }} comments</a>
+            <a href="" class="submitter">{{ post.submitter }}<span></a>
+        </p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<small ng-show="postGroups" class="fin">~ fin ~ </small>
