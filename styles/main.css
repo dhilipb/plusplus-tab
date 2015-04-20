@@ -35,17 +35,6 @@ a:hover {
     cursor: pointer;
 }
 
-.container {}
-
-.error,
-.loading {
-    text-align: center;
-    display: block;
-    color: #aaa;
-    font-size: 12px;
-    margin-left: -10px;
-    /* it looks uncentered otherwise */
-}
 /* Posts */
 
 .container {
