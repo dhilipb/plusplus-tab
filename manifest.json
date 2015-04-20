@@ -16,6 +16,6 @@
    "name": "__MSG_appName__",
    "permissions": [ "webRequest", "tabs", "http://*/*", "https://*/*", "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.0.6",
+   "version": "0.0.7",
    "web_accessible_resources": [  ]
 }
