@@ -11,7 +11,12 @@ var App = angular.module('App')
             scope.sources[source]['lastFetched'] = (new Date).getTime();
         };
         Cache.clear = function(source, scope) {
-            scope.posts[source] = [];
+            for (s in scope.posts) {
+                post = scope.posts[s];
+                if (void 0 != post && post['source'] == source) {
+                    scope.posts.splice(s, 1);
+                }
+            }
         }
         return Cache;
     })
