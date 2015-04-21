@@ -1,14 +1,10 @@
 var App = angular.module('App')
 
 // Retrieve JSON/Oauth
-.service('Retriever', function($http, Cache, OAuth) {
+.service('Retriever', function($http, Cache, OAuth, $localStorage) {
 
-    var scope = null;
     var Retriever = {};
 
-    Retriever.setScope = function(sc) {
-        scope = sc;
-    }
     Retriever.fetchJSON = function(source, callback, fallback) {
         var jsonUrl = void 0 == fallback ? Sources[source]['url'] : Sources[source]['fallback'];
 
@@ -27,14 +23,14 @@ var App = angular.module('App')
                     Retreiver.fetchJSON(source, callback, true);
                 }
             } else {
-                Cache.setLastFetched(source, scope);
+                Cache.setLastFetched(source);
                 callback(source, data);
-                scope.sources[source]['loading'] = false;
+                $localStorage.sources[source]['loading'] = false;
             }
         })
         .error(function() {
             console.log("Could not retrieve " + source + " feed");
-            scope.sources[source]['loading'] = false;
+            $localStorage.sources[source]['loading'] = false;
 
             if (void 0 != Sources[source]['fallback']) {
                 console.log("Trying fallback URL");
@@ -56,22 +52,24 @@ var App = angular.module('App')
                 posts: data.posts
             };
 
-            Cache.setLastFetched(source, scope);
-            scope.sources[source]['loading'] = false;
+            Cache.setLastFetched(source);
+            $localStorage.sources[source]['loading'] = false;
 
             callback(source, postGroup);
         })
     };
     Retriever.fetchPosts = function(source, callback) {
-        if (!Cache.check(source, scope)) {
+        if (!Cache.check(source)) {
 
-            Cache.clear(source, scope);
-            scope.sources[source]['loading'] = true;
+            Cache.clear(source);
+            $localStorage.sources[source]['loading'] = true;
 
             if (Sources[source]['auth'] == "OAuth") {
                 Retriever.fetchOAuth(source, callback);
+                console.log("Fetching posts " + source);
             } else {
                 Retriever.fetchJSON(source, callback);
+                console.log("Fetching posts " + source);
             }
         }
     };

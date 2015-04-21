@@ -10,11 +10,7 @@ App
         $scope.posts = $localStorage.posts;
         $scope.sources = $localStorage.sources;
 
-        // TODO: Hacky, need to research for the best way
-        Feed.setScope($scope);
-        Retriever.setScope($scope);
-
-        // Retreive all the fantastic feeds!!
+       // Retreive all the fantastic feeds!!
         Retriever.fetchPosts("HackerNews", Feed.HackerNews);
         Retriever.fetchPosts("ProductHunt", Feed.ProductHunt);
         Retriever.fetchPosts("Reddit", Feed.Reddit);
@@ -31,7 +27,10 @@ App
         }, function(newVal, oldVal) {
             if (oldVal != newVal) {
                 $scope.sources = $localStorage.sources;
-                $scope.posts = $localStorage.posts;
+
+                if (newVal.posts.length > oldVal.posts.length) {
+                    $scope.posts = $localStorage.posts;
+                }
             }
         }, true);
 
@@ -69,3 +68,15 @@ _gaq.push(['_trackPageview']);
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(ga, s);
 })();
+
+
+// Prototype shizzle
+Array.prototype.clean = function(deleteValue) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == deleteValue) {
+            this.splice(i, 1);
+            i--;
+        }
+    }
+    return this;
+};

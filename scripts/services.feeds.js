@@ -1,12 +1,7 @@
 var limit = 10;
 var App = angular.module('App')
-    .service('Feed', function(Retriever, Screenshot) {
-        var scope = null;
+    .service('Feed', function(Retriever, Screenshot, $localStorage) {
         var Feed = {};
-
-        Feed.setScope = function(sc) {
-            scope = sc;
-        }
         Feed.HackerNews = function(source, posts) {
             // Check for fallback
             if (void 0 == posts[0]['image']) {
@@ -25,7 +20,7 @@ var App = angular.module('App')
                     post.image = Screenshot.placeholder();
                 }
 
-                scope.posts.push({
+                $localStorage.posts.push({
                     'source': source,
                     'url': post.url,
                     'votes': post.upVotes,
@@ -54,7 +49,7 @@ var App = angular.module('App')
                     return;
                 }
 
-                scope.posts.push({
+                $localStorage.posts.push({
                     'source': 'HackerNews',
                     'url': url,
                     'votes': post.points,
@@ -78,7 +73,7 @@ var App = angular.module('App')
 
                 var post = posts.posts[p];
 
-                scope.posts.push({
+                $localStorage.posts.push({
                     'source': source,
                     'url': post.redirect_url,
                     'votes': post.votes_count,
@@ -103,11 +98,11 @@ var App = angular.module('App')
                 }
 
                 var post = posts.data.children[p].data;
-                var index = scope.posts.length;
+                var index = $localStorage.posts.length;
                 var title = unescape(post.title.length > 120 ? post.title.substring(0, 115) + "..." : post.title);
                 title = title.replace(/&amp;/g, '&');
 
-                scope.posts.push({
+                $localStorage.posts.push({
                     'source': source,
                     'url': post.url,
                     'votes': post.ups,
@@ -131,7 +126,7 @@ var App = angular.module('App')
 
                 var post = posts.stories[p];
 
-                scope.posts.push({
+                $localStorage.posts.push({
                     'source': source,
                     'url': post.url,
                     'votes': post.vote_count,
