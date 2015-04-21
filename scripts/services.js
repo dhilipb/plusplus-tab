@@ -17,7 +17,8 @@ var App = angular.module('App')
             url: jsonUrl,
             headers: {
                 'Content-type': 'application/json'
-            }
+            },
+            timeout: 5000
         })
         .success(function(data) {
             if (data == null) {

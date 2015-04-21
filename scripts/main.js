@@ -33,7 +33,7 @@ App
                 $scope.sources = $localStorage.sources;
                 $scope.posts = $localStorage.posts;
             }
-        });
+        }, true);
 
     });
 
